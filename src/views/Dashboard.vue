@@ -25,12 +25,12 @@
         <div class="flex items-start justify-between">
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-md bg-muted flex items-center justify-center text-foreground shrink-0">
-              <Smartphone v-if="device.platform === 'android' || device.platform === 'ios'" class="w-4 h-4" />
+              <Smartphone v-if="device.type === 'android' || device.type === 'ios'" class="w-4 h-4" />
               <Monitor v-else class="w-4 h-4" />
             </div>
             <div class="overflow-hidden">
               <h4 class="font-medium text-sm truncate max-w-[140px]">{{ device.name || $t('dashboard.unnamedDevice') }}</h4>
-              <p class="text-xs text-muted-foreground capitalize mt-0.5">{{ device.platform || $t('dashboard.unknownPlatform') }}</p>
+              <p class="text-xs text-muted-foreground capitalize mt-0.5">{{ device.type || $t('dashboard.unknownPlatform') }}</p>
             </div>
           </div>
           <button @click="removeDevice(device.id)" class="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all" title="Remove Device">

@@ -2,12 +2,7 @@
   <div class="min-h-screen bg-background text-foreground flex overflow-hidden">
     <!-- Mobile header with hamburger -->
     <div class="md:hidden fixed top-0 left-0 right-0 h-14 border-b border-border bg-background/95 backdrop-blur z-20 flex items-center justify-between px-4">
-      <div class="flex items-center gap-2">
-        <div class="w-6 h-6 bg-primary rounded-md flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
-        </div>
-        <h1 class="text-base font-semibold">CoLink</h1>
-      </div>
+      <h1 class="text-base font-semibold">CoLink</h1>
       <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-1.5 text-muted-foreground hover:text-foreground transition-colors">
         <Menu class="w-5 h-5" />
       </button>
@@ -16,17 +11,12 @@
     <!-- Sidebar (responsive) -->
     <aside 
       :class="[
-        'fixed md:relative top-0 left-0 z-30 h-full w-[240px] border-r border-border bg-background flex flex-col transition-transform duration-300',
+        'fixed md:relative top-0 left-0 z-30 h-screen w-[240px] border-r border-border bg-background flex flex-col transition-transform duration-300',
         mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       ]"
     >
       <div class="h-14 flex items-center justify-between px-5">
-        <div class="flex items-center gap-2">
-          <div class="w-6 h-6 bg-primary rounded-md flex items-center justify-center shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
-          </div>
-          <h1 class="text-base font-semibold">CoLink</h1>
-        </div>
+        <h1 class="text-base font-semibold">CoLink</h1>
         <button @click="mobileMenuOpen = false" class="md:hidden p-1.5 text-muted-foreground">
           <X class="w-4 h-4" />
         </button>
@@ -45,26 +35,24 @@
               : 'text-muted-foreground hover:bg-muted hover:text-foreground'
           ]"
         >
-          <component :is="item.icon" class="w-4 h-4" />
+          <component :is="item.icon" class="w-4 h-4 shrink-0" />
           {{ $t(item.nameKey) }}
         </router-link>
       </nav>
 
       <!-- User & Logout at bottom -->
-      <div class="p-4 flex flex-col gap-1">
-        <div class="flex items-center gap-3 px-3 py-2">
-          <div class="w-7 h-7 rounded-full bg-muted flex items-center justify-center font-medium border border-border text-xs">
+      <div class="px-3 pb-4 space-y-1">
+        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground">
+          <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0">
             U
           </div>
-          <div class="flex-1 overflow-hidden">
-            <p class="text-sm font-medium truncate">User</p>
-          </div>
+          <span class="truncate font-medium">User</span>
         </div>
         <button 
           @click="handleLogout"
-          class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
         >
-          <LogOut class="w-4 h-4" />
+          <LogOut class="w-4 h-4 shrink-0" />
           {{ $t('nav.logout') }}
         </button>
       </div>

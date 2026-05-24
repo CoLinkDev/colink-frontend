@@ -2,9 +2,6 @@
   <div class="min-h-screen flex flex-col sm:justify-center items-center bg-background p-4 sm:p-0">
     <div class="w-full max-w-sm mt-10 sm:mt-0">
       <div class="flex flex-col space-y-2 text-center mb-8">
-        <div class="w-12 h-12 bg-primary rounded-xl mx-auto flex items-center justify-center mb-2 shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-        </div>
         <h1 class="text-2xl font-semibold tracking-tight">{{ $t('register.title') }}</h1>
         <p class="text-sm text-muted-foreground">{{ $t('register.subtitle') }}</p>
       </div>

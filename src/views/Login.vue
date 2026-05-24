@@ -2,9 +2,6 @@
   <div class="min-h-screen flex flex-col sm:justify-center items-center bg-background p-4 sm:p-0">
     <div class="w-full max-w-sm mt-10 sm:mt-0">
       <div class="flex flex-col space-y-2 text-center mb-8">
-        <div class="w-12 h-12 bg-primary rounded-xl mx-auto flex items-center justify-center mb-2 shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
-        </div>
         <h1 class="text-2xl font-semibold tracking-tight">{{ $t('login.welcome') }}</h1>
         <p class="text-sm text-muted-foreground">{{ $t('login.subtitle') }}</p>
       </div>
