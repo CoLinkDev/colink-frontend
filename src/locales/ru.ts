@@ -7,10 +7,7 @@ export default {
     signIn: 'Войти',
     noAccount: 'Нет учетной записи?',
     createOne: 'Создать',
-    infrastructure: 'Минималистичная инфраструктура устройств',
     tagline: 'Бесшовное соединение для вашей частной цифровой экосистемы.',
-    philosophy: '«Простота — это высшая степень изысканности. Связь должна быть легкой, безопасной и красивой.»',
-    author: '— Философия CoLink',
     loginFailed: 'Ошибка входа',
     checkCredentials: 'Пожалуйста, проверьте свои учетные данные.',
     connectionError: 'Ошибка подключения.'
@@ -30,7 +27,6 @@ export default {
     devices: 'Устройства',
     settings: 'Настройки',
     logout: 'Выйти',
-    menu: 'Меню'
   },
   devices: {
     name: 'Устройство',
@@ -46,7 +42,6 @@ export default {
     noDevicesHint: 'Вы еще не подключили ни одного устройства. Скачайте приложение CoLink на свое устройство, чтобы начать работу.',
     online: 'В сети',
     offline: 'Вне сети',
-    lastSeen: 'В сети',
     unnamedDevice: 'Безымянное устройство',
     unknownPlatform: 'Неизвестно',
     removeDeviceConfirm: 'Вы уверены, что хотите удалить это устройство?',
@@ -71,12 +66,10 @@ export default {
     confirm: 'Подтвердить',
     cancel: 'Отмена',
     ok: 'ОК',
-    unknown: 'Неизвестно',
     never: 'Никогда',
     remove: 'Удалить',
     refresh: 'Обновить',
     selectLanguage: 'Выбрать язык',
-    selectLanguageDesc: 'Выберите предпочитаемый язык интерфейса.'
   },
   theme: {
     title: 'Оформление',

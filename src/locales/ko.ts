@@ -7,10 +7,7 @@ export default {
     signIn: '로그인',
     noAccount: '계정이 없으신가요?',
     createOne: '계정 만들기',
-    infrastructure: '미니멀리스트 디바이스 인프라',
     tagline: '사설 디지털 생태계를 위한 원활하고 경계 없는 연결 경험.',
-    philosophy: '“단순함이야말로 궁극의 정교함입니다. 연결은 쉬우면서도 안전하고 아름다워야 합니다.”',
-    author: '— CoLink 철학',
     loginFailed: '로그인 실패',
     checkCredentials: '이메일 또는 비밀번호를 확인해 주세요.',
     connectionError: '서버 연결 오류.'
@@ -30,7 +27,6 @@ export default {
     devices: '디바이스 관리',
     settings: '설정',
     logout: '로그아웃',
-    menu: '메뉴'
   },
   devices: {
     name: '디바이스 이름',
@@ -46,7 +42,6 @@ export default {
     noDevicesHint: '연결된 디바이스가 없습니다. 시작하려면 디바이스에 CoLink 앱을 다운로드해 주세요.',
     online: '온라인',
     offline: '오프라인',
-    lastSeen: '최근 온라인',
     unnamedDevice: '이름 없는 디바이스',
     unknownPlatform: '알 수 없는 플랫폼',
     removeDeviceConfirm: '이 디바이스를 삭제하시겠습니까?',
@@ -71,12 +66,10 @@ export default {
     confirm: '확인',
     cancel: '취소',
     ok: '확인',
-    unknown: '알 수 없음',
     never: '없음',
     remove: '삭제',
     refresh: '새로고침',
     selectLanguage: '언어 선택',
-    selectLanguageDesc: '선호하는 인터페이스 언어를 선택하세요.'
   },
   theme: {
     title: '테마',

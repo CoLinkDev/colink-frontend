@@ -7,10 +7,7 @@ export default {
     signIn: '登入',
     noAccount: '沒有帳戶？',
     createOne: '建立一個',
-    infrastructure: '極簡設備基礎設施',
     tagline: '為您的私有數位生態，提供無縫且無界的連接體驗。',
-    philosophy: '「至繁歸於至簡。連接，本應是不費吹灰之力、安全而優雅的。」',
-    author: '— CoLink 哲學',
     loginFailed: '登入失敗',
     checkCredentials: '請檢查您的帳號密碼。',
     connectionError: '連接伺服器時出錯。'
@@ -30,7 +27,6 @@ export default {
     devices: '設備管理',
     settings: '設定',
     logout: '登出',
-    menu: '選單'
   },
   devices: {
     name: '設備名稱',
@@ -46,7 +42,6 @@ export default {
     noDevicesHint: '您尚未連接任何設備。請在您的設備上下載 CoLink 應用程式以開始使用。',
     online: '線上',
     offline: '離線',
-    lastSeen: '上次可見',
     unnamedDevice: '未知設備',
     unknownPlatform: '未知平台',
     removeDeviceConfirm: '您確定要移除該設備嗎？',
@@ -71,12 +66,10 @@ export default {
     confirm: '確認',
     cancel: '取消',
     ok: '確定',
-    unknown: '未知',
     never: '從不',
     remove: '移除',
     refresh: '重新整理',
     selectLanguage: '選擇語言',
-    selectLanguageDesc: '選擇您偏好的顯示語言。'
   },
   theme: {
     title: '外觀',

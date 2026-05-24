@@ -7,10 +7,7 @@ export default {
     signIn: 'ログイン',
     noAccount: "アカウントをお持ちでないですか？",
     createOne: 'アカウント作成',
-    infrastructure: 'ミニマリスト・デバイス・インフラ',
     tagline: 'プライベートなデジタルエコシステムに、シームレスで境界のない接続体験を。',
-    philosophy: '「複雑さの極みは、シンプルさにあります。接続は本来、簡単で、安全で、そしてエレガントであるべきです。」',
-    author: '— CoLink フィロソフィー',
     loginFailed: 'ログイン失敗',
     checkCredentials: 'メールアドレスまたはパスワードを確認してください。',
     connectionError: 'サーバーへの接続エラー。'
@@ -30,7 +27,6 @@ export default {
     devices: 'デバイス管理',
     settings: '設定',
     logout: 'ログアウト',
-    menu: 'メニュー'
   },
   devices: {
     name: 'デバイス名',
@@ -46,7 +42,6 @@ export default {
     noDevicesHint: 'まだデバイスが接続されていません。開始するには、お使いのデバイスに CoLink アプリをダウンロードしてください。',
     online: 'オンライン',
     offline: 'オフライン',
-    lastSeen: '最終オンライン',
     unnamedDevice: '未命名のデバイス',
     unknownPlatform: '不明なプラットフォーム',
     removeDeviceConfirm: 'このデバイスを削除してもよろしいですか？',
@@ -72,12 +67,10 @@ export default {
     confirm: '確認',
     cancel: 'キャンセル',
     ok: '確定',
-    unknown: '不明',
     never: 'なし',
     remove: '削除',
     refresh: '更新',
     selectLanguage: '言語の選択',
-    selectLanguageDesc: '表示言語を選択してください。'
   },
   theme: {
     title: 'テーマ',

@@ -7,10 +7,7 @@ export default {
     signIn: 'Iniciar sesión',
     noAccount: '¿No tiene una cuenta?',
     createOne: 'Cree una',
-    infrastructure: 'Infraestructura de dispositivos minimalista',
     tagline: 'Conectividad perfecta para su ecosistema digital privado.',
-    philosophy: '“La simplicidad es la máxima sofisticación. La conectividad debe ser fácil, segura y hermosa.”',
-    author: '— Filosofía CoLink',
     loginFailed: 'Error al iniciar sesión',
     checkCredentials: 'Por favor, compruebe sus credenciales.',
     connectionError: 'Error de conexión.'
@@ -30,7 +27,6 @@ export default {
     devices: 'Dispositivos',
     settings: 'Configuración',
     logout: 'Cerrar sesión',
-    menu: 'Menú'
   },
   devices: {
     name: 'Dispositivo',
@@ -46,7 +42,6 @@ export default {
     noDevicesHint: 'Aún no ha conectado ningún dispositivo. Descargue la aplicación CoLink en su dispositivo para comenzar.',
     online: 'En línea',
     offline: 'Desconectado',
-    lastSeen: 'Visto por última vez',
     unnamedDevice: 'Dispositivo sin nombre',
     unknownPlatform: 'Desconocido',
     removeDeviceConfirm: '¿Está seguro de que desea eliminar este dispositivo?',
@@ -71,12 +66,10 @@ export default {
     confirm: 'Confirmar',
     cancel: 'Cancelar',
     ok: 'Aceptar',
-    unknown: 'Desconocido',
     never: 'Nunca',
     remove: 'Eliminar',
     refresh: 'Actualizar',
     selectLanguage: 'Seleccionar idioma',
-    selectLanguageDesc: 'Elija su idioma preferido para la interfaz.'
   },
   theme: {
     title: 'Tema',
