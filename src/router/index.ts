@@ -30,11 +30,6 @@ const router = createRouter({
           path: 'settings',
           name: 'Settings',
           component: () => import('@/views/Settings.vue')
-        },
-        {
-          path: 'sessions',
-          name: 'Sessions',
-          component: () => import('@/views/Sessions.vue')
         }
       ]
     }

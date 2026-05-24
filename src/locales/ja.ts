@@ -28,7 +28,6 @@ export default {
   },
   nav: {
     dashboard: 'ダッシュボード',
-    sessions: 'セッション',
     settings: '設定',
     logout: 'ログアウト',
     menu: 'メニュー'
@@ -61,18 +60,7 @@ export default {
     passwordUpdateFailed: 'パスワードの更新に失敗しました',
     signOutConfirm: '本当にログアウトしますか？'
   },
-  sessions: {
-    title: 'アクティブセッション',
-    subtitle: 'すべてのデバイスでのアクティブなログインセッションを管理します。',
-    noSessions: 'アクティブなセッションはありません。',
-    current: '現在',
-    created: '作成日時',
-    revoke: '取り消し',
-    unknownIp: '不明な IP',
-    unknownDevice: '不明なデバイス',
-    revokeConfirm: 'このセッションを取り消しますか？',
-    revokeFailed: 'セッションの取り消しに失敗しました'
-  },
+
   common: {
     confirm: '確認',
     cancel: 'キャンセル',

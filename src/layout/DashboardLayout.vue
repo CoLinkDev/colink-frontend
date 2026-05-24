@@ -169,7 +169,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { LayoutDashboard, Settings, Activity, LogOut, Menu, X, Languages, Sun, Moon, Monitor } from 'lucide-vue-next'
+import { LayoutDashboard, Settings, LogOut, Menu, X, Languages, Sun, Moon, Monitor } from 'lucide-vue-next'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
@@ -192,7 +192,6 @@ const logoutDialogOpen = ref(false)
 
 const navItems = [
   { nameKey: 'nav.dashboard', path: '/', icon: LayoutDashboard },
-  { nameKey: 'nav.sessions', path: '/sessions', icon: Activity },
   { nameKey: 'nav.settings', path: '/settings', icon: Settings }
 ]
 

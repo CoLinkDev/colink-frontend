@@ -28,7 +28,6 @@ export default {
   },
   nav: {
     dashboard: '仪表盘',
-    sessions: '会话',
     settings: '设置',
     logout: '注销',
     menu: '菜单'
@@ -61,18 +60,7 @@ export default {
     passwordUpdateFailed: '更新密码失败',
     signOutConfirm: '您确定要注销登录吗？'
   },
-  sessions: {
-    title: '活跃会话',
-    subtitle: '管理您所有设备上的活动登录会话。',
-    noSessions: '未找到活动会话。',
-    current: '当前',
-    created: '创建于',
-    revoke: '撤销',
-    unknownIp: '未知 IP',
-    unknownDevice: '未知设备',
-    revokeConfirm: '您确定要撤销该会话吗？',
-    revokeFailed: '撤销会话失败'
-  },
+
   common: {
     confirm: '确认',
     cancel: '取消',

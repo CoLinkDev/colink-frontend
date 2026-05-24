@@ -28,7 +28,6 @@ export default {
   },
   nav: {
     dashboard: 'Dashboard',
-    sessions: 'Sessions',
     settings: 'Settings',
     logout: 'Logout',
     menu: 'Menu'
@@ -61,18 +60,7 @@ export default {
     passwordUpdateFailed: 'Failed to update password',
     signOutConfirm: 'Are you sure you want to sign out?'
   },
-  sessions: {
-    title: 'Active Sessions',
-    subtitle: 'Manage your active login sessions across all devices.',
-    noSessions: 'No active sessions found.',
-    current: 'Current',
-    created: 'Created',
-    revoke: 'Revoke',
-    unknownIp: 'Unknown IP',
-    unknownDevice: 'Unknown Device',
-    revokeConfirm: 'Are you sure you want to revoke this session?',
-    revokeFailed: 'Failed to revoke session'
-  },
+
   common: {
     confirm: 'Confirm',
     cancel: 'Cancel',
