@@ -50,6 +50,7 @@ export default {
     title: 'Account Settings',
     subtitle: 'Update your password and manage your account.',
     changePassword: 'Change Password',
+    changePasswordHint: 'Update your account password to ensure security.',
     currentPassword: 'Current Password',
     newPassword: 'New Password',
     confirmNewPassword: 'Confirm New Password',
@@ -71,5 +72,15 @@ export default {
     unknownDevice: 'Unknown Device',
     revokeConfirm: 'Are you sure you want to revoke this session?',
     revokeFailed: 'Failed to revoke session'
+  },
+  common: {
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    ok: 'OK',
+    unknown: 'Unknown',
+    never: 'Never',
+    remove: 'Remove',
+    selectLanguage: 'Select Language',
+    selectLanguageDesc: 'Choose your preferred language for the interface.'
   }
 }

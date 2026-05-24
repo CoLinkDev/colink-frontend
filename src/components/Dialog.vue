@@ -22,9 +22,10 @@
               @click="handleCancel"
               class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background hover:bg-muted h-9 px-4 py-2"
             >
-              {{ cancelText || 'Cancel' }}
+              {{ cancelText || $t('common.cancel') }}
             </button>
             <button 
+              v-if="!hideConfirm"
               @click="handleConfirm"
               :class="[
                 'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring h-9 px-4 py-2 shadow-sm',
@@ -33,7 +34,7 @@
                   : 'bg-primary text-primary-foreground hover:bg-primary/90'
               ]"
             >
-              {{ confirmText || 'Confirm' }}
+              {{ confirmText || $t('common.confirm') }}
             </button>
           </div>
         </div>
@@ -51,13 +52,15 @@ interface Props {
   cancelText?: string
   variant?: 'default' | 'destructive'
   hideCancel?: boolean
+  hideConfirm?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  confirmText: 'Confirm',
-  cancelText: 'Cancel',
+  confirmText: '',
+  cancelText: '',
   variant: 'default',
-  hideCancel: false
+  hideCancel: false,
+  hideConfirm: false
 })
 
 const emit = defineEmits(['update:open', 'confirm', 'cancel'])

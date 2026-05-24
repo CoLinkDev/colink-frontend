@@ -53,7 +53,6 @@
       :title="$t('sessions.revokeConfirm')"
       description=""
       :confirmText="$t('sessions.revoke')"
-      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
       variant="destructive"
       @confirm="confirmRevokeSession"
     />
@@ -63,7 +62,7 @@
       v-model:open="alertDialog.open"
       :title="alertDialog.title"
       :description="alertDialog.description"
-      :confirmText="locale === 'zh-CN' ? '确定' : 'OK'"
+      :confirmText="$t('common.ok')"
       hideCancel
     />
   </div>
@@ -76,7 +75,7 @@ import { Globe, Activity, RefreshCw } from 'lucide-vue-next'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
 const sessions = ref<any[]>([])
 const loading = ref(false)
 
@@ -132,7 +131,7 @@ const confirmRevokeSession = async () => {
 }
 
 const formatDate = (ts: string | number) => {
-  if (!ts) return 'Unknown'
+  if (!ts) return t('common.unknown')
   return new Date(ts).toLocaleString()
 }
 

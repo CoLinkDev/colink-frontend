@@ -50,6 +50,7 @@ export default {
     title: '账户设置',
     subtitle: '更新密码并管理您的账户。',
     changePassword: '修改密码',
+    changePasswordHint: '更新您的账户密码以确保安全性。',
     currentPassword: '当前密码',
     newPassword: '新密码',
     confirmNewPassword: '确认新密码',
@@ -71,5 +72,15 @@ export default {
     unknownDevice: '未知设备',
     revokeConfirm: '您确定要撤销该会话吗？',
     revokeFailed: '撤销会话失败'
+  },
+  common: {
+    confirm: '确认',
+    cancel: '取消',
+    ok: '确定',
+    unknown: '未知',
+    never: '从不',
+    remove: '移除',
+    selectLanguage: '选择语言',
+    selectLanguageDesc: '选择您首选的显示语言。'
   }
 }

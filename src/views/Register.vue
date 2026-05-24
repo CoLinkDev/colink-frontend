@@ -107,7 +107,7 @@
       v-model:open="alertDialog.open"
       :title="alertDialog.title"
       :description="alertDialog.description"
-      confirmText="OK"
+      :confirmText="$t('common.ok')"
       hideCancel
     />
   </div>

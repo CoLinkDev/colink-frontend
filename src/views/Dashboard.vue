@@ -53,8 +53,7 @@
       v-model:open="confirmDialogOpen"
       :title="$t('dashboard.removeDeviceConfirm')"
       description=""
-      :confirmText="$t('sessions.revoke') ? '移除' : 'Remove'"
-      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
+      :confirmText="$t('common.remove')"
       variant="destructive"
       @confirm="confirmRemoveDevice"
     />
@@ -64,7 +63,7 @@
       v-model:open="alertDialog.open"
       :title="alertDialog.title"
       :description="alertDialog.description"
-      :confirmText="locale === 'zh-CN' ? '确定' : 'OK'"
+      :confirmText="$t('common.ok')"
       hideCancel
     />
   </div>
@@ -77,7 +76,7 @@ import { Monitor, Smartphone, Trash2, RefreshCw } from 'lucide-vue-next'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
 const devices = ref<any[]>([])
 const loading = ref(false)
 
@@ -133,7 +132,7 @@ const confirmRemoveDevice = async () => {
 }
 
 const formatDate = (ts: number) => {
-  if (!ts) return 'Never'
+  if (!ts) return t('common.never')
   return new Date(ts).toLocaleString()
 }
 

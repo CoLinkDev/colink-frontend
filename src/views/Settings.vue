@@ -12,7 +12,7 @@
         <div class="space-y-1 md:w-1/3">
           <h4 class="text-base font-semibold">{{ $t('settings.changePassword') }}</h4>
           <p class="text-xs text-muted-foreground max-w-[240px]">
-            更新您的账户密码以确保安全性。
+            {{ $t('settings.changePasswordHint') }}
           </p>
         </div>
         
@@ -66,7 +66,7 @@
       v-model:open="alertDialog.open"
       :title="alertDialog.title"
       :description="alertDialog.description"
-      :confirmText="locale === 'zh-CN' ? '确定' : 'OK'"
+      :confirmText="$t('common.ok')"
       hideCancel
       @confirm="handleAlertConfirm"
     />
@@ -83,7 +83,7 @@ import Dialog from '@/components/Dialog.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
-const { locale, t } = useI18n()
+const { t } = useI18n()
 
 const pwdForm = reactive({
   oldPassword: '',

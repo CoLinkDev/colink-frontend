@@ -52,11 +52,13 @@
 
         <!-- Language selector -->
         <button 
-          @click="toggleLanguage"
+          @click="openLanguageDialog"
           class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
         >
           <Languages class="w-4 h-4 shrink-0" />
-          <span class="truncate font-medium">{{ locale === 'zh-CN' ? 'English' : '简体中文' }}</span>
+          <span class="truncate font-medium">
+            {{ locale === 'zh-CN' ? '简体中文' : (locale === 'ja' ? '日本語' : 'English') }}
+          </span>
         </button>
 
         <!-- Logout button -->
@@ -76,10 +78,32 @@
       :title="$t('settings.signOutConfirm')"
       description=""
       :confirmText="$t('nav.logout')"
-      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
       variant="destructive"
       @confirm="confirmLogout"
     />
+
+    <!-- Language Selection Dialog Modal -->
+    <Dialog 
+      v-model:open="langDialogOpen"
+      :title="$t('common.selectLanguage')"
+      description=""
+      hideConfirm
+    >
+      <div class="grid gap-2 mt-2">
+        <button 
+          v-for="opt in languageOptions" 
+          :key="opt.code"
+          @click="selectLanguage(opt.code)"
+          class="flex w-full items-center justify-between px-4 py-3 rounded-lg border text-sm font-medium transition-all duration-200"
+          :class="locale === opt.code 
+            ? 'border-primary bg-primary/5 text-primary' 
+             : 'border-border bg-card hover:bg-muted text-foreground'"
+        >
+          <span>{{ opt.name }}</span>
+          <span class="text-xs text-muted-foreground font-normal">{{ opt.nativeName }}</span>
+        </button>
+      </div>
+    </Dialog>
 
     <!-- Overlay for mobile menu -->
     <div 
@@ -146,10 +170,22 @@ const confirmLogout = async () => {
   router.push({ name: 'Login' })
 }
 
-const toggleLanguage = () => {
-  const newLocale = locale.value === 'zh-CN' ? 'en' : 'zh-CN'
-  locale.value = newLocale
-  localStorage.setItem('locale', newLocale)
+const langDialogOpen = ref(false)
+
+const languageOptions = [
+  { code: 'zh-CN', name: '简体中文', nativeName: 'Simplified Chinese' },
+  { code: 'en', name: 'English', nativeName: 'English' },
+  { code: 'ja', name: '日本語', nativeName: 'Japanese' }
+]
+
+const openLanguageDialog = () => {
+  langDialogOpen.value = true
+}
+
+const selectLanguage = (code: string) => {
+  locale.value = code
+  localStorage.setItem('locale', code)
+  langDialogOpen.value = false
 }
 
 onMounted(() => {
