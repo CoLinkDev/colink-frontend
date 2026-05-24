@@ -6,7 +6,14 @@ export default {
     password: '密码',
     signIn: '登录',
     noAccount: "没有账户？",
-    createOne: '创建一个'
+    createOne: '创建一个',
+    infrastructure: '极简设备基础设施',
+    tagline: '为您的私有数字生态，提供无缝且无界的连接体验。',
+    philosophy: '“至繁归于至简。连接，本应是不费吹灰之力、安全而优雅的。”',
+    author: '— CoLink 哲学',
+    loginFailed: '登录失败',
+    checkCredentials: '请检查您的账号密码。',
+    connectionError: '连接服务器时出错。'
   },
   register: {
     title: '创建账户',
@@ -14,7 +21,10 @@ export default {
     confirmPassword: '确认密码',
     register: '注册',
     hasAccount: '已经有账户了？',
-    signIn: '登录'
+    signIn: '登录',
+    registerFailed: '注册失败',
+    tryAgain: '请稍后重试。',
+    connectionError: '连接服务器时出错。'
   },
   nav: {
     dashboard: '仪表盘',

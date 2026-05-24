@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen w-full flex bg-background">
     <!-- Left Pane (Artistic brand panel for desktop) -->
-    <div class="hidden lg:flex lg:w-1/2 bg-zinc-950 text-zinc-50 flex-col justify-between p-12 relative overflow-hidden border-r border-zinc-900">
+    <div class="hidden lg:flex lg:w-1/2 bg-zinc-950 text-zinc-50 flex-col justify-center p-12 relative overflow-hidden border-r border-zinc-900">
       <!-- Glow & Grid -->
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#18181b,transparent_70%)] opacity-80"></div>
       
@@ -32,29 +32,15 @@
       </svg>
       
       <!-- Top Section -->
-      <div class="relative z-10 flex items-center gap-2">
+      <div class="absolute top-12 left-12 z-10 flex items-center gap-2 select-none">
         <span class="text-xl font-bold tracking-tighter text-zinc-100 uppercase">CoLink</span>
       </div>
 
       <!-- Center tagline -->
-      <div class="relative z-10 my-auto max-w-md">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-[10px] font-medium tracking-wide text-zinc-400 backdrop-blur-sm mb-4">
-          <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
-          Minimalist Device Infrastructure
-        </div>
+      <div class="relative z-10 select-none">
         <h2 class="text-3xl font-semibold tracking-tight leading-snug text-zinc-100">
-          The quiet, secure way to link your digital environment.
+          {{ $t('login.tagline') }}
         </h2>
-      </div>
-
-      <!-- Bottom philosophical quote -->
-      <div class="relative z-10 max-w-sm">
-        <blockquote class="space-y-1">
-          <p class="text-sm font-light leading-relaxed text-zinc-400">
-            “Simplicity is the ultimate sophistication. Connectivity should be effortless, secure, and beautiful.”
-          </p>
-          <footer class="text-xs font-semibold text-zinc-600">— CoLink Philosophy</footer>
-        </blockquote>
       </div>
     </div>
 
@@ -121,12 +107,14 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
+const { t } = useI18n()
 
 const form = reactive({
   email: '',
@@ -154,10 +142,10 @@ const handleLogin = async () => {
       auth.setToken(res.data.token)
       router.push('/')
     } else {
-      showAlert('Login Failed', res.message || 'Please check your credentials.')
+      showAlert(t('login.loginFailed'), res.message || t('login.checkCredentials'))
     }
   } catch (error: any) {
-    showAlert('Login Failed', error.response?.data?.message || 'Connection error.')
+    showAlert(t('login.loginFailed'), error.response?.data?.message || t('login.connectionError'))
   } finally {
     loading.value = false
   }

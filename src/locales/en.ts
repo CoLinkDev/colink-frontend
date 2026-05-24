@@ -6,7 +6,14 @@ export default {
     password: 'Password',
     signIn: 'Sign In',
     noAccount: "Don't have an account?",
-    createOne: 'Create one'
+    createOne: 'Create one',
+    infrastructure: 'Minimalist Device Infrastructure',
+    tagline: 'Seamless connectivity for your private digital ecosystem.',
+    philosophy: '“Simplicity is the ultimate sophistication. Connectivity should be effortless, secure, and beautiful.”',
+    author: '— CoLink Philosophy',
+    loginFailed: 'Login Failed',
+    checkCredentials: 'Please check your credentials.',
+    connectionError: 'Connection error.'
   },
   register: {
     title: 'Create Account',
@@ -14,7 +21,10 @@ export default {
     confirmPassword: 'Confirm Password',
     register: 'Register',
     hasAccount: 'Already have an account?',
-    signIn: 'Sign in'
+    signIn: 'Sign in',
+    registerFailed: 'Registration Failed',
+    tryAgain: 'Please try again.',
+    connectionError: 'Connection error.'
   },
   nav: {
     dashboard: 'Dashboard',
