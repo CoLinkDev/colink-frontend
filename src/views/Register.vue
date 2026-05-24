@@ -67,6 +67,15 @@
             >
           </div>
           <div class="space-y-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('register.username') }}</label>
+            <input 
+              v-model="form.username" 
+              type="text" 
+              required
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+          </div>
+          <div class="space-y-1.5">
             <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('login.password') }}</label>
             <input 
               v-model="form.password" 
@@ -125,6 +134,7 @@ const { t } = useI18n()
 
 const form = reactive({
   email: '',
+  username: '',
   password: '',
   confirmPassword: ''
 })
@@ -151,6 +161,7 @@ const handleRegister = async () => {
   try {
     const res: any = await request.post('/auth/register', {
       email: form.email,
+      username: form.username,
       password: form.password
     })
     if (res.code === 0) {

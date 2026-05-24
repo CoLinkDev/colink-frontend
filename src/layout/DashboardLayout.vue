@@ -43,11 +43,11 @@
       <!-- User, Language & Logout at bottom -->
       <div class="px-3 pb-4 space-y-1">
         <!-- User profile -->
-        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground" :title="auth.email || 'User'">
+        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground" :title="displayName">
           <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0 uppercase">
-            {{ (auth.email || 'U')[0] }}
+            {{ displayInitial }}
           </div>
-          <span class="truncate font-medium">{{ auth.email || 'User' }}</span>
+          <span class="truncate font-medium">{{ displayName }}</span>
         </div>
 
         <!-- Language selector -->
@@ -186,6 +186,9 @@ const themeIcon = computed(() => {
   if (theme.value === 'dark') return Moon
   return MonitorIcon
 })
+
+const displayName = computed(() => auth.username || auth.email || 'User')
+const displayInitial = computed(() => displayName.value.charAt(0) || 'U')
 
 const mobileMenuOpen = ref(false)
 const logoutDialogOpen = ref(false)

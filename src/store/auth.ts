@@ -5,6 +5,7 @@ import request from '@/utils/request'
 export const useAuthStore = defineStore('auth', () => {
   const token = ref(localStorage.getItem('token') || '')
   const email = ref(localStorage.getItem('email') || '')
+  const username = ref(localStorage.getItem('username') || '')
 
   const isAuthenticated = computed(() => !!token.value)
 
@@ -18,11 +19,18 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.setItem('email', newEmail)
   }
 
+  function setUsername(newUsername: string) {
+    username.value = newUsername
+    localStorage.setItem('username', newUsername)
+  }
+
   function clearToken() {
     token.value = ''
     email.value = ''
+    username.value = ''
     localStorage.removeItem('token')
     localStorage.removeItem('email')
+    localStorage.removeItem('username')
   }
 
   async function fetchProfile() {
@@ -31,11 +39,12 @@ export const useAuthStore = defineStore('auth', () => {
       const res: any = await request.get('/me')
       if (res.code === 0 && res.data?.email) {
         setEmail(res.data.email)
+        setUsername(res.data.username || '')
       }
     } catch (e) {
       console.error('Failed to fetch profile', e)
     }
   }
 
-  return { token, email, isAuthenticated, setToken, setEmail, clearToken, fetchProfile }
+  return { token, email, username, isAuthenticated, setToken, setEmail, setUsername, clearToken, fetchProfile }
 })

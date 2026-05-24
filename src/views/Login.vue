@@ -58,10 +58,11 @@
 
         <form @submit.prevent="handleLogin" class="space-y-4">
           <div class="space-y-1.5">
-            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('login.email') }}</label>
+            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('login.identifier') }}</label>
             <input 
-              v-model="form.email" 
-              type="email" 
+              v-model="form.identifier" 
+              type="text" 
+              :placeholder="$t('login.identifierPlaceholder')"
               required
               class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -117,7 +118,7 @@ const auth = useAuthStore()
 const { t } = useI18n()
 
 const form = reactive({
-  email: '',
+  identifier: '',
   password: ''
 })
 const loading = ref(false)
