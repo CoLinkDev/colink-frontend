@@ -57,7 +57,7 @@
         >
           <Languages class="w-4 h-4 shrink-0" />
           <span class="truncate font-medium flex-1 text-left">
-            {{ locale === 'zh-CN' ? '简体中文' : (locale === 'ja' ? '日本語' : 'English') }}
+            {{ languageOptions.find(opt => opt.code === locale)?.name || 'English' }}
           </span>
         </button>
 
@@ -100,18 +100,18 @@
       description=""
       hideConfirm
     >
-      <div class="grid gap-2 mt-2">
+      <div class="grid grid-cols-2 gap-2 mt-2">
         <button 
           v-for="opt in languageOptions" 
           :key="opt.code"
           @click="selectLanguage(opt.code)"
-          class="flex w-full items-center justify-between px-4 py-3 rounded-lg border text-sm font-medium transition-all duration-200"
+          class="flex flex-col items-start justify-center px-4 py-3 rounded-lg border text-sm font-medium transition-all duration-200"
           :class="locale === opt.code 
             ? 'border-primary bg-primary/5 text-primary' 
              : 'border-border bg-card hover:bg-muted text-foreground'"
         >
-          <span>{{ opt.name }}</span>
-          <span class="text-xs text-muted-foreground font-normal">{{ opt.nativeName }}</span>
+          <span class="text-sm font-semibold">{{ opt.name }}</span>
+          <span class="text-xs text-muted-foreground font-normal mt-0.5">{{ opt.nativeName }}</span>
         </button>
       </div>
     </Dialog>
@@ -217,9 +217,14 @@ const confirmLogout = async () => {
 const langDialogOpen = ref(false)
 
 const languageOptions = [
-  { code: 'zh-CN', name: '简体中文', nativeName: 'Simplified Chinese' },
   { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'ja', name: '日本語', nativeName: 'Japanese' }
+  { code: 'zh-CN', name: '简体中文', nativeName: 'Simplified Chinese' },
+  { code: 'zh-TW', name: '繁體中文', nativeName: 'Traditional Chinese' },
+  { code: 'ja', name: '日本語', nativeName: 'Japanese' },
+  { code: 'ko', name: '한국어', nativeName: 'Korean' },
+  { code: 'es', name: 'Español', nativeName: 'Spanish' },
+  { code: 'de', name: 'Deutsch', nativeName: 'German' },
+  { code: 'ru', name: 'Русский', nativeName: 'Russian' }
 ]
 
 const openLanguageDialog = () => {
