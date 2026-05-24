@@ -1,54 +1,54 @@
 <template>
   <div class="space-y-6">
-    <div>
-      <h3 class="text-2xl font-bold tracking-tight">{{ $t('settings.title') }}</h3>
-      <p class="text-muted-foreground text-sm mt-1">{{ $t('settings.subtitle') }}</p>
+    <div class="space-y-1">
+      <h3 class="text-xl font-semibold tracking-tight">{{ $t('settings.title') }}</h3>
+      <p class="text-muted-foreground text-sm">{{ $t('settings.subtitle') }}</p>
     </div>
 
     <div class="max-w-xl">
-      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-foreground">
-            <Key class="w-5 h-5" />
+      <div class="bg-card border border-border rounded-lg p-5 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 rounded-md bg-muted flex items-center justify-center text-foreground shrink-0">
+            <Key class="w-4 h-4" />
           </div>
-          <h4 class="text-lg font-medium">{{ $t('settings.changePassword') }}</h4>
+          <h4 class="text-base font-medium">{{ $t('settings.changePassword') }}</h4>
         </div>
 
         <form @submit.prevent="handleChangePassword" class="space-y-4">
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <label class="text-sm font-medium leading-none">{{ $t('settings.currentPassword') }}</label>
             <input 
               v-model="pwdForm.oldPassword" 
               type="password" 
               required
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
           </div>
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <label class="text-sm font-medium leading-none">{{ $t('settings.newPassword') }}</label>
             <input 
               v-model="pwdForm.newPassword" 
               type="password" 
               required
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
           </div>
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <label class="text-sm font-medium leading-none">{{ $t('settings.confirmNewPassword') }}</label>
             <input 
               v-model="pwdForm.confirmPassword" 
               type="password" 
               required
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
           </div>
           
           <button 
             type="submit" 
             :disabled="loading"
-            class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2 w-full transition-colors disabled:opacity-50"
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 mt-2 w-full"
           >
-            <span v-if="loading" class="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin mr-2"></span>
+            <span v-if="loading" class="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></span>
             {{ $t('settings.updatePassword') }}
           </button>
         </form>

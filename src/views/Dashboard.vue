@@ -1,46 +1,46 @@
 <template>
   <div class="space-y-6">
     <div class="flex items-center justify-between">
-      <div>
-        <h3 class="text-2xl font-bold tracking-tight">{{ $t('dashboard.title') }}</h3>
-        <p class="text-muted-foreground text-sm mt-1">{{ $t('dashboard.subtitle') }}</p>
+      <div class="space-y-1">
+        <h3 class="text-xl font-semibold tracking-tight">{{ $t('dashboard.title') }}</h3>
+        <p class="text-muted-foreground text-sm">{{ $t('dashboard.subtitle') }}</p>
       </div>
-      <button @click="fetchDevices" class="p-2 rounded-md hover:bg-secondary text-muted-foreground transition-colors">
-        <RefreshCw class="w-5 h-5" :class="{ 'animate-spin': loading }" />
+      <button @click="fetchDevices" class="p-2 rounded-md hover:bg-muted text-muted-foreground transition-colors">
+        <RefreshCw class="w-4 h-4" :class="{ 'animate-spin': loading }" />
       </button>
     </div>
 
     <div v-if="loading && devices.length === 0" class="flex justify-center py-12">
-      <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      <div class="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
     </div>
     
-    <div v-else-if="devices.length === 0" class="flex flex-col items-center justify-center py-16 border border-dashed border-border rounded-xl bg-card/50">
-      <Monitor class="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
-      <h4 class="text-lg font-medium">{{ $t('dashboard.noDevices') }}</h4>
+    <div v-else-if="devices.length === 0" class="flex flex-col items-center justify-center py-16 border border-dashed border-border rounded-lg bg-background">
+      <Monitor class="w-10 h-10 text-muted-foreground mb-4 opacity-40" stroke-width="1.5" />
+      <h4 class="text-base font-medium">{{ $t('dashboard.noDevices') }}</h4>
       <p class="text-sm text-muted-foreground text-center max-w-sm mt-1">{{ $t('dashboard.noDevicesHint') }}</p>
     </div>
 
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="device in devices" :key="device.id" class="group relative bg-card border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-for="device in devices" :key="device.id" class="group relative bg-card border border-border rounded-lg p-4 shadow-sm transition-all hover:shadow-md">
         <div class="flex items-start justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-foreground">
-              <Smartphone v-if="device.platform === 'android' || device.platform === 'ios'" class="w-5 h-5" />
-              <Monitor v-else class="w-5 h-5" />
+            <div class="w-9 h-9 rounded-md bg-muted flex items-center justify-center text-foreground shrink-0">
+              <Smartphone v-if="device.platform === 'android' || device.platform === 'ios'" class="w-4 h-4" />
+              <Monitor v-else class="w-4 h-4" />
             </div>
-            <div>
-              <h4 class="font-medium truncate max-w-[150px]">{{ device.name || $t('dashboard.unnamedDevice') }}</h4>
-              <p class="text-xs text-muted-foreground capitalize">{{ device.platform || $t('dashboard.unknownPlatform') }}</p>
+            <div class="overflow-hidden">
+              <h4 class="font-medium text-sm truncate max-w-[140px]">{{ device.name || $t('dashboard.unnamedDevice') }}</h4>
+              <p class="text-xs text-muted-foreground capitalize mt-0.5">{{ device.platform || $t('dashboard.unknownPlatform') }}</p>
             </div>
           </div>
-          <button @click="removeDevice(device.id)" class="opacity-0 group-hover:opacity-100 p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all" title="Remove Device">
+          <button @click="removeDevice(device.id)" class="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all" title="Remove Device">
             <Trash2 class="w-4 h-4" />
           </button>
         </div>
         
-        <div class="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
+        <div class="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
           <div class="flex items-center gap-1.5">
-            <div class="w-2 h-2 rounded-full" :class="device.online ? 'bg-green-500' : 'bg-muted-foreground'"></div>
+            <div class="w-2 h-2 rounded-full" :class="device.online ? 'bg-emerald-500' : 'bg-muted-foreground/40'"></div>
             {{ device.online ? $t('dashboard.online') : $t('dashboard.offline') }}
           </div>
           <div>{{ $t('dashboard.lastSeen') }}: {{ formatDate(device.last_seen || device.lastSeen) }}</div>
