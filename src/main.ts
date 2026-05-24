@@ -4,6 +4,10 @@ import router from './router'
 import i18n from './locales'
 import './index.css'
 import App from './App.vue'
+import { useTheme } from './utils/theme'
+
+// Initialize theme
+useTheme()
 
 const app = createApp(App)
 

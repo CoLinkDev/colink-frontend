@@ -82,5 +82,11 @@ export default {
     remove: '移除',
     selectLanguage: '选择语言',
     selectLanguageDesc: '选择您首选的显示语言。'
+  },
+  theme: {
+    title: '外观',
+    light: '浅色',
+    dark: '深色',
+    auto: '自动'
   }
 }

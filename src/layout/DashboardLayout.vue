@@ -56,8 +56,19 @@
           class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
         >
           <Languages class="w-4 h-4 shrink-0" />
-          <span class="truncate font-medium">
+          <span class="truncate font-medium flex-1 text-left">
             {{ locale === 'zh-CN' ? '简体中文' : (locale === 'ja' ? '日本語' : 'English') }}
+          </span>
+        </button>
+
+        <!-- Theme selector -->
+        <button 
+          @click="openThemeDialog"
+          class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+        >
+          <component :is="themeIcon" class="w-4 h-4 shrink-0" />
+          <span class="truncate font-medium flex-1 text-left">
+            {{ $t(`theme.${theme}`) }}
           </span>
         </button>
 
@@ -105,6 +116,32 @@
       </div>
     </Dialog>
 
+    <!-- Theme Selection Dialog Modal -->
+    <Dialog 
+      v-model:open="themeDialogOpen"
+      :title="$t('theme.title')"
+      description=""
+      hideConfirm
+    >
+      <div class="grid gap-2 mt-2">
+        <button 
+          v-for="opt in themeOptions" 
+          :key="opt.code"
+          @click="selectTheme(opt.code)"
+          class="flex w-full items-center justify-between px-4 py-3 rounded-lg border text-sm font-medium transition-all duration-200"
+          :class="theme === opt.code 
+            ? 'border-primary bg-primary/5 text-primary' 
+             : 'border-border bg-card hover:bg-muted text-foreground'"
+        >
+          <div class="flex items-center gap-3">
+            <component :is="opt.icon" class="w-4 h-4 shrink-0" />
+            <span>{{ opt.name }}</span>
+          </div>
+          <span v-if="theme === opt.code" class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+        </button>
+      </div>
+    </Dialog>
+
     <!-- Overlay for mobile menu -->
     <div 
       v-if="mobileMenuOpen" 
@@ -132,15 +169,23 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { LayoutDashboard, Settings, Activity, LogOut, Menu, X, Languages } from 'lucide-vue-next'
+import { LayoutDashboard, Settings, Activity, LogOut, Menu, X, Languages, Sun, Moon, Monitor } from 'lucide-vue-next'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
+import { useTheme, type ThemeMode } from '@/utils/theme'
 
 const router = useRouter()
 const route = useRoute()
 const { locale, t } = useI18n()
 const auth = useAuthStore()
+const { theme, setTheme } = useTheme()
+
+const themeIcon = computed(() => {
+  if (theme.value === 'light') return Sun
+  if (theme.value === 'dark') return Moon
+  return Monitor
+})
 
 const mobileMenuOpen = ref(false)
 const logoutDialogOpen = ref(false)
@@ -186,6 +231,23 @@ const selectLanguage = (code: string) => {
   locale.value = code
   localStorage.setItem('locale', code)
   langDialogOpen.value = false
+}
+
+const themeDialogOpen = ref(false)
+
+const themeOptions = computed(() => [
+  { code: 'light' as ThemeMode, name: t('theme.light'), icon: Sun },
+  { code: 'dark' as ThemeMode, name: t('theme.dark'), icon: Moon },
+  { code: 'auto' as ThemeMode, name: t('theme.auto'), icon: Monitor }
+])
+
+const openThemeDialog = () => {
+  themeDialogOpen.value = true
+}
+
+const selectTheme = (mode: ThemeMode) => {
+  setTheme(mode)
+  themeDialogOpen.value = false
 }
 
 onMounted(() => {

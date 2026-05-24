@@ -82,5 +82,11 @@ export default {
     remove: '削除',
     selectLanguage: '言語の選択',
     selectLanguageDesc: '表示言語を選択してください。'
+  },
+  theme: {
+    title: 'テーマ',
+    light: 'ライト',
+    dark: 'ダーク',
+    auto: '自動'
   }
 }

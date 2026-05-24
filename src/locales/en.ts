@@ -82,5 +82,11 @@ export default {
     remove: 'Remove',
     selectLanguage: 'Select Language',
     selectLanguageDesc: 'Choose your preferred language for the interface.'
+  },
+  theme: {
+    title: 'Theme',
+    light: 'Light',
+    dark: 'Dark',
+    auto: 'Auto'
   }
 }
