@@ -40,16 +40,28 @@
         </router-link>
       </nav>
 
-      <!-- User & Logout at bottom -->
+      <!-- User, Language & Logout at bottom -->
       <div class="px-3 pb-4 space-y-1">
-        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground">
-          <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0">
-            U
-          </div>
-          <span class="truncate font-medium">User</span>
-        </div>
+        <!-- Language selector -->
         <button 
-          @click="handleLogout"
+          @click="toggleLanguage"
+          class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+        >
+          <Languages class="w-4 h-4 shrink-0" />
+          <span class="truncate font-medium">{{ locale === 'zh-CN' ? 'English' : '简体中文' }}</span>
+        </button>
+
+        <!-- User profile -->
+        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground" :title="auth.email || 'User'">
+          <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0 uppercase">
+            {{ (auth.email || 'U')[0] }}
+          </div>
+          <span class="truncate font-medium">{{ auth.email || 'User' }}</span>
+        </div>
+
+        <!-- Logout button -->
+        <button 
+          @click="triggerLogout"
           class="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
         >
           <LogOut class="w-4 h-4 shrink-0" />
@@ -57,6 +69,17 @@
         </button>
       </div>
     </aside>
+
+    <!-- Logout Dialog Modal -->
+    <Dialog 
+      v-model:open="logoutDialogOpen"
+      :title="$t('settings.signOutConfirm')"
+      description=""
+      :confirmText="$t('nav.logout')"
+      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
+      variant="destructive"
+      @confirm="confirmLogout"
+    />
 
     <!-- Overlay for mobile menu -->
     <div 
@@ -82,19 +105,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { LayoutDashboard, Settings, Activity, LogOut, Menu, X } from 'lucide-vue-next'
+import { LayoutDashboard, Settings, Activity, LogOut, Menu, X, Languages } from 'lucide-vue-next'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
+import Dialog from '@/components/Dialog.vue'
 
 const router = useRouter()
 const route = useRoute()
-const { t } = useI18n()
+const { locale, t } = useI18n()
 const auth = useAuthStore()
 
 const mobileMenuOpen = ref(false)
+const logoutDialogOpen = ref(false)
 
 const navItems = [
   { nameKey: 'nav.dashboard', path: '/', icon: LayoutDashboard },
@@ -107,8 +132,11 @@ const currentRouteName = computed(() => {
   return currentItem ? t(currentItem.nameKey) : ''
 })
 
-const handleLogout = async () => {
-  if (!confirm(t('settings.signOutConfirm'))) return
+const triggerLogout = () => {
+  logoutDialogOpen.value = true
+}
+
+const confirmLogout = async () => {
   try {
     await request.post('/auth/logout')
   } catch (e) {
@@ -117,6 +145,16 @@ const handleLogout = async () => {
   auth.clearToken()
   router.push({ name: 'Login' })
 }
+
+const toggleLanguage = () => {
+  const newLocale = locale.value === 'zh-CN' ? 'en' : 'zh-CN'
+  locale.value = newLocale
+  localStorage.setItem('locale', newLocale)
+}
+
+onMounted(() => {
+  auth.fetchProfile()
+})
 </script>
 
 <style scoped>

@@ -50,6 +50,15 @@
         <router-link to="/login" class="text-foreground font-medium hover:underline underline-offset-4">{{ $t('register.signIn') }}</router-link>
       </div>
     </div>
+
+    <!-- Alert Dialog Modal -->
+    <Dialog 
+      v-model:open="alertDialog.open"
+      :title="alertDialog.title"
+      :description="alertDialog.description"
+      confirmText="OK"
+      hideCancel
+    />
   </div>
 </template>
 
@@ -58,6 +67,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import request from '@/utils/request'
+import Dialog from '@/components/Dialog.vue'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -69,9 +79,21 @@ const form = reactive({
 })
 const loading = ref(false)
 
+const alertDialog = reactive({
+  open: false,
+  title: '',
+  description: ''
+})
+
+const showAlert = (title: string, description: string) => {
+  alertDialog.title = title
+  alertDialog.description = description
+  alertDialog.open = true
+}
+
 const handleRegister = async () => {
   if (form.password !== form.confirmPassword) {
-    alert(t('settings.passwordMismatch'))
+    showAlert(t('settings.passwordMismatch'), '')
     return
   }
   loading.value = true
@@ -83,10 +105,10 @@ const handleRegister = async () => {
     if (res.code === 0) {
       router.push('/login')
     } else {
-      alert(res.message || 'Registration failed')
+      showAlert('Registration Failed', res.message || 'Please try again.')
     }
   } catch (error: any) {
-    alert(error.response?.data?.message || 'Registration failed')
+    showAlert('Registration Failed', error.response?.data?.message || 'Connection error.')
   } finally {
     loading.value = false
   }

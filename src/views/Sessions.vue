@@ -38,7 +38,7 @@
           
           <button 
             v-if="!session.isCurrent"
-            @click="revokeSession(session.id)" 
+            @click="triggerRevokeSession(session.id)" 
             class="px-2.5 py-1.5 text-xs font-medium text-destructive bg-destructive/10 hover:bg-destructive/20 rounded-md transition-colors"
           >
             {{ $t('sessions.revoke') }}
@@ -46,18 +46,54 @@
         </div>
       </div>
     </div>
+
+    <!-- Confirm Revoke Session Dialog -->
+    <Dialog 
+      v-model:open="confirmDialogOpen"
+      :title="$t('sessions.revokeConfirm')"
+      description=""
+      :confirmText="$t('sessions.revoke')"
+      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
+      variant="destructive"
+      @confirm="confirmRevokeSession"
+    />
+
+    <!-- Alert Message Dialog -->
+    <Dialog 
+      v-model:open="alertDialog.open"
+      :title="alertDialog.title"
+      :description="alertDialog.description"
+      :confirmText="locale === 'zh-CN' ? '确定' : 'OK'"
+      hideCancel
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Globe, Activity, RefreshCw } from 'lucide-vue-next'
 import request from '@/utils/request'
+import Dialog from '@/components/Dialog.vue'
 
-const { t } = useI18n()
+const { locale, t } = useI18n()
 const sessions = ref<any[]>([])
 const loading = ref(false)
+
+const confirmDialogOpen = ref(false)
+const sessionToRevoke = ref<string | null>(null)
+
+const alertDialog = reactive({
+  open: false,
+  title: '',
+  description: ''
+})
+
+const showAlert = (title: string, description: string) => {
+  alertDialog.title = title
+  alertDialog.description = description
+  alertDialog.open = true
+}
 
 const fetchSessions = async () => {
   loading.value = true
@@ -73,17 +109,25 @@ const fetchSessions = async () => {
   }
 }
 
-const revokeSession = async (id: string) => {
-  if (!confirm(t('sessions.revokeConfirm'))) return
+const triggerRevokeSession = (id: string) => {
+  sessionToRevoke.value = id
+  confirmDialogOpen.value = true
+}
+
+const confirmRevokeSession = async () => {
+  if (!sessionToRevoke.value) return
+  const id = sessionToRevoke.value
   try {
     const res: any = await request.delete(`/auth/sessions/${id}`)
     if (res.code === 0) {
       sessions.value = sessions.value.filter(s => s.id !== id)
     } else {
-      alert(res.message || t('sessions.revokeFailed'))
+      showAlert(t('sessions.revokeFailed'), res.message || '')
     }
   } catch (error) {
-    alert(t('sessions.revokeFailed'))
+    showAlert(t('sessions.revokeFailed'), '')
+  } finally {
+    sessionToRevoke.value = null
   }
 }
 

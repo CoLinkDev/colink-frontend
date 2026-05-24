@@ -4,7 +4,7 @@ import zhCN from './zh-CN'
 
 const i18n = createI18n({
   legacy: false,
-  locale: navigator.language.startsWith('zh') ? 'zh-CN' : 'en',
+  locale: localStorage.getItem('locale') || (navigator.language.startsWith('zh') ? 'zh-CN' : 'en'),
   fallbackLocale: 'en',
   messages: {
     en,

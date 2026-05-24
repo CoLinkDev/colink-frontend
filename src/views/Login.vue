@@ -41,6 +41,15 @@
         <router-link to="/register" class="text-foreground font-medium hover:underline underline-offset-4">{{ $t('login.createOne') }}</router-link>
       </div>
     </div>
+
+    <!-- Alert Dialog Modal -->
+    <Dialog 
+      v-model:open="alertDialog.open"
+      :title="alertDialog.title"
+      :description="alertDialog.description"
+      confirmText="OK"
+      hideCancel
+    />
   </div>
 </template>
 
@@ -49,6 +58,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
+import Dialog from '@/components/Dialog.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -59,6 +69,18 @@ const form = reactive({
 })
 const loading = ref(false)
 
+const alertDialog = reactive({
+  open: false,
+  title: '',
+  description: ''
+})
+
+const showAlert = (title: string, description: string) => {
+  alertDialog.title = title
+  alertDialog.description = description
+  alertDialog.open = true
+}
+
 const handleLogin = async () => {
   loading.value = true
   try {
@@ -67,10 +89,10 @@ const handleLogin = async () => {
       auth.setToken(res.data.token)
       router.push('/')
     } else {
-      alert(res.message || 'Login failed')
+      showAlert('Login Failed', res.message || 'Please check your credentials.')
     }
   } catch (error: any) {
-    alert(error.response?.data?.message || 'Login failed')
+    showAlert('Login Failed', error.response?.data?.message || 'Connection error.')
   } finally {
     loading.value = false
   }

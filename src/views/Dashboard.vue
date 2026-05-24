@@ -33,7 +33,7 @@
               <p class="text-xs text-muted-foreground capitalize mt-0.5">{{ device.type || $t('dashboard.unknownPlatform') }}</p>
             </div>
           </div>
-          <button @click="removeDevice(device.id)" class="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all" title="Remove Device">
+          <button @click="triggerRemoveDevice(device.id)" class="opacity-0 group-hover:opacity-100 p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all" title="Remove Device">
             <Trash2 class="w-4 h-4" />
           </button>
         </div>
@@ -47,18 +47,54 @@
         </div>
       </div>
     </div>
+
+    <!-- Confirm Remove Device Dialog -->
+    <Dialog 
+      v-model:open="confirmDialogOpen"
+      :title="$t('dashboard.removeDeviceConfirm')"
+      description=""
+      :confirmText="$t('sessions.revoke') ? '移除' : 'Remove'"
+      :cancelText="locale === 'zh-CN' ? '取消' : 'Cancel'"
+      variant="destructive"
+      @confirm="confirmRemoveDevice"
+    />
+
+    <!-- Alert Message Dialog -->
+    <Dialog 
+      v-model:open="alertDialog.open"
+      :title="alertDialog.title"
+      :description="alertDialog.description"
+      :confirmText="locale === 'zh-CN' ? '确定' : 'OK'"
+      hideCancel
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Monitor, Smartphone, Trash2, RefreshCw } from 'lucide-vue-next'
 import request from '@/utils/request'
+import Dialog from '@/components/Dialog.vue'
 
-const { t } = useI18n()
+const { locale, t } = useI18n()
 const devices = ref<any[]>([])
 const loading = ref(false)
+
+const confirmDialogOpen = ref(false)
+const deviceToRemove = ref<string | null>(null)
+
+const alertDialog = reactive({
+  open: false,
+  title: '',
+  description: ''
+})
+
+const showAlert = (title: string, description: string) => {
+  alertDialog.title = title
+  alertDialog.description = description
+  alertDialog.open = true
+}
 
 const fetchDevices = async () => {
   loading.value = true
@@ -74,17 +110,25 @@ const fetchDevices = async () => {
   }
 }
 
-const removeDevice = async (id: string) => {
-  if (!confirm(t('dashboard.removeDeviceConfirm'))) return
+const triggerRemoveDevice = (id: string) => {
+  deviceToRemove.value = id
+  confirmDialogOpen.value = true
+}
+
+const confirmRemoveDevice = async () => {
+  if (!deviceToRemove.value) return
+  const id = deviceToRemove.value
   try {
     const res: any = await request.delete(`/devices/${id}`)
     if (res.code === 0) {
       devices.value = devices.value.filter(d => d.id !== id)
     } else {
-      alert(res.message || t('dashboard.removeDeviceFailed'))
+      showAlert(t('dashboard.removeDeviceFailed'), res.message || '')
     }
   } catch (error) {
-    alert(t('dashboard.removeDeviceFailed'))
+    showAlert(t('dashboard.removeDeviceFailed'), '')
+  } finally {
+    deviceToRemove.value = null
   }
 }
 
