@@ -27,10 +27,17 @@ export default {
     connectionError: 'Connection error.'
   },
   nav: {
-    dashboard: 'Dashboard',
+    devices: 'Devices',
     settings: 'Settings',
     logout: 'Logout',
     menu: 'Menu'
+  },
+  devices: {
+    name: 'Device',
+    platform: 'Platform',
+    status: 'Status',
+    lastSeen: 'Last Seen',
+    actions: 'Actions'
   },
   dashboard: {
     title: 'Devices',
@@ -68,6 +75,7 @@ export default {
     unknown: 'Unknown',
     never: 'Never',
     remove: 'Remove',
+    refresh: 'Refresh',
     selectLanguage: 'Select Language',
     selectLanguageDesc: 'Choose your preferred language for the interface.'
   },

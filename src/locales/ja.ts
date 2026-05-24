@@ -27,10 +27,17 @@ export default {
     connectionError: 'サーバーへの接続エラー。'
   },
   nav: {
-    dashboard: 'ダッシュボード',
+    devices: 'デバイス管理',
     settings: '設定',
     logout: 'ログアウト',
     menu: 'メニュー'
+  },
+  devices: {
+    name: 'デバイス名',
+    platform: 'プラットフォーム',
+    status: '状態',
+    lastSeen: '最終オンライン',
+    actions: '操作'
   },
   dashboard: {
     title: 'デバイス管理',
@@ -68,6 +75,7 @@ export default {
     unknown: '不明',
     never: 'なし',
     remove: '削除',
+    refresh: '更新',
     selectLanguage: '言語の選択',
     selectLanguageDesc: '表示言語を選択してください。'
   },

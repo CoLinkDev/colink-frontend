@@ -169,7 +169,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { LayoutDashboard, Settings, LogOut, Menu, X, Languages, Sun, Moon, Monitor } from 'lucide-vue-next'
+import { Settings, LogOut, Menu, X, Languages, Sun, Moon, Monitor as MonitorIcon } from 'lucide-vue-next'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
@@ -184,14 +184,14 @@ const { theme, setTheme } = useTheme()
 const themeIcon = computed(() => {
   if (theme.value === 'light') return Sun
   if (theme.value === 'dark') return Moon
-  return Monitor
+  return MonitorIcon
 })
 
 const mobileMenuOpen = ref(false)
 const logoutDialogOpen = ref(false)
 
 const navItems = [
-  { nameKey: 'nav.dashboard', path: '/', icon: LayoutDashboard },
+  { nameKey: 'nav.devices', path: '/', icon: MonitorIcon },
   { nameKey: 'nav.settings', path: '/settings', icon: Settings }
 ]
 
@@ -237,7 +237,7 @@ const themeDialogOpen = ref(false)
 const themeOptions = computed(() => [
   { code: 'light' as ThemeMode, name: t('theme.light'), icon: Sun },
   { code: 'dark' as ThemeMode, name: t('theme.dark'), icon: Moon },
-  { code: 'auto' as ThemeMode, name: t('theme.auto'), icon: Monitor }
+  { code: 'auto' as ThemeMode, name: t('theme.auto'), icon: MonitorIcon }
 ])
 
 const openThemeDialog = () => {

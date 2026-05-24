@@ -23,8 +23,8 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'Dashboard',
-          component: () => import('@/views/Dashboard.vue')
+          name: 'Devices',
+          component: () => import('@/views/Devices.vue')
         },
         {
           path: 'settings',
@@ -41,7 +41,7 @@ router.beforeEach((to, _from, next) => {
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     next({ name: 'Login' })
   } else if (to.meta.requiresGuest && auth.isAuthenticated) {
-    next({ name: 'Dashboard' })
+    next({ name: 'Devices' })
   } else {
     next()
   }

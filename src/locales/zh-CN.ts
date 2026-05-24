@@ -27,10 +27,17 @@ export default {
     connectionError: '连接服务器时出错。'
   },
   nav: {
-    dashboard: '仪表盘',
+    devices: '设备管理',
     settings: '设置',
     logout: '注销',
     menu: '菜单'
+  },
+  devices: {
+    name: '设备名称',
+    platform: '平台',
+    status: '状态',
+    lastSeen: '上次可见时间',
+    actions: '操作'
   },
   dashboard: {
     title: '设备管理',
@@ -68,6 +75,7 @@ export default {
     unknown: '未知',
     never: '从不',
     remove: '移除',
+    refresh: '刷新',
     selectLanguage: '选择语言',
     selectLanguageDesc: '选择您首选的显示语言。'
   },
