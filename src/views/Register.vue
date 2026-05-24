@@ -1,53 +1,118 @@
 <template>
-  <div class="min-h-screen flex flex-col sm:justify-center items-center bg-background p-4 sm:p-0">
-    <div class="w-full max-w-sm mt-10 sm:mt-0">
-      <div class="flex flex-col space-y-2 text-center mb-8">
-        <h1 class="text-2xl font-semibold tracking-tight">{{ $t('register.title') }}</h1>
-        <p class="text-sm text-muted-foreground">{{ $t('register.subtitle') }}</p>
+  <div class="min-h-screen w-full flex bg-background">
+    <!-- Left Pane (Artistic brand panel for desktop) -->
+    <div class="hidden lg:flex lg:w-1/2 bg-zinc-950 text-zinc-50 flex-col justify-between p-12 relative overflow-hidden border-r border-zinc-900">
+      <!-- Glow & Grid -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#18181b,transparent_70%)] opacity-80"></div>
+      
+      <!-- Premium Constellation SVG -->
+      <svg class="absolute inset-0 w-full h-full opacity-35" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid-left" width="32" height="32" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.12)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid-left)" />
+        
+        <g stroke="rgba(255,255,255,0.08)" stroke-width="0.75" fill="none">
+          <line x1="20%" y1="30%" x2="45%" y2="25%" />
+          <line x1="45%" y1="25%" x2="35%" y2="60%" />
+          <line x1="45%" y1="25%" x2="70%" y2="40%" />
+          <line x1="70%" y1="40%" x2="60%" y2="75%" />
+          <line x1="35%" y1="60%" x2="60%" y2="75%" />
+          <line x1="20%" y1="30%" x2="35%" y2="60%" />
+        </g>
+        <g fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+          <circle cx="20%" cy="30%" r="3" fill="#09090b" />
+          <circle cx="45%" cy="25%" r="4" fill="#09090b" />
+          <circle cx="35%" cy="60%" r="3.5" fill="#09090b" />
+          <circle cx="70%" cy="40%" r="4.5" fill="#09090b" />
+          <circle cx="60%" cy="75%" r="3" fill="#09090b" />
+        </g>
+      </svg>
+      
+      <!-- Top Section -->
+      <div class="relative z-10 flex items-center gap-2">
+        <span class="text-xl font-bold tracking-tighter text-zinc-100 uppercase">CoLink</span>
       </div>
 
-      <form @submit.prevent="handleRegister" class="space-y-4">
-        <div class="space-y-1.5">
-          <label class="text-sm font-medium leading-none">{{ $t('login.email') }}</label>
-          <input 
-            v-model="form.email" 
-            type="email" 
-            required
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          >
+      <!-- Center tagline -->
+      <div class="relative z-10 my-auto max-w-md">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-[10px] font-medium tracking-wide text-zinc-400 backdrop-blur-sm mb-4">
+          <span class="w-1 h-1 rounded-full bg-zinc-400"></span>
+          Minimalist Device Infrastructure
         </div>
-        <div class="space-y-1.5">
-          <label class="text-sm font-medium leading-none">{{ $t('login.password') }}</label>
-          <input 
-            v-model="form.password" 
-            type="password" 
-            required
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          >
-        </div>
-        <div class="space-y-1.5">
-          <label class="text-sm font-medium leading-none">{{ $t('register.confirmPassword') }}</label>
-          <input 
-            v-model="form.confirmPassword" 
-            type="password" 
-            required
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          >
-        </div>
-        
-        <button 
-          type="submit" 
-          :disabled="loading"
-          class="inline-flex w-full items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 mt-2"
-        >
-          <span v-if="loading" class="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></span>
-          {{ $t('register.register') }}
-        </button>
-      </form>
+        <h2 class="text-3xl font-semibold tracking-tight leading-snug text-zinc-100">
+          The quiet, secure way to link your digital environment.
+        </h2>
+      </div>
 
-      <div class="mt-8 text-center text-sm">
-        <span class="text-muted-foreground">{{ $t('register.hasAccount') }} </span>
-        <router-link to="/login" class="text-foreground font-medium hover:underline underline-offset-4">{{ $t('register.signIn') }}</router-link>
+      <!-- Bottom philosophical quote -->
+      <div class="relative z-10 max-w-sm">
+        <blockquote class="space-y-1">
+          <p class="text-sm font-light leading-relaxed text-zinc-400">
+            “Simplicity is the ultimate sophistication. Connectivity should be effortless, secure, and beautiful.”
+          </p>
+          <footer class="text-xs font-semibold text-zinc-600">— CoLink Philosophy</footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- Right Pane (Clean Sign Up form) -->
+    <div class="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 md:p-12 relative">
+      <!-- Subtle dotted grid for mobile background -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.03),transparent_60%)] lg:bg-none pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-50"></div>
+
+      <div class="w-full max-w-sm relative z-10">
+        <div class="flex flex-col space-y-2 text-center mb-8">
+          <h1 class="text-xl font-bold tracking-tight text-foreground sm:text-2xl">{{ $t('register.title') }}</h1>
+          <p class="text-sm text-muted-foreground">{{ $t('register.subtitle') }}</p>
+        </div>
+
+        <form @submit.prevent="handleRegister" class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('login.email') }}</label>
+            <input 
+              v-model="form.email" 
+              type="email" 
+              required
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('login.password') }}</label>
+            <input 
+              v-model="form.password" 
+              type="password" 
+              required
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-xs font-semibold uppercase tracking-wider text-muted-foreground leading-none">{{ $t('register.confirmPassword') }}</label>
+            <input 
+              v-model="form.confirmPassword" 
+              type="password" 
+              required
+              class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+          </div>
+          
+          <button 
+            type="submit" 
+            :disabled="loading"
+            class="inline-flex w-full items-center justify-center rounded-md text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 mt-4"
+          >
+            <span v-if="loading" class="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></span>
+            {{ $t('register.register') }}
+          </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm">
+          <span class="text-muted-foreground">{{ $t('register.hasAccount') }} </span>
+          <router-link to="/login" class="text-foreground font-medium hover:underline underline-offset-4">{{ $t('register.signIn') }}</router-link>
+        </div>
       </div>
     </div>
 

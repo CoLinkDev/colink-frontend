@@ -42,6 +42,14 @@
 
       <!-- User, Language & Logout at bottom -->
       <div class="px-3 pb-4 space-y-1">
+        <!-- User profile -->
+        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground" :title="auth.email || 'User'">
+          <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0 uppercase">
+            {{ (auth.email || 'U')[0] }}
+          </div>
+          <span class="truncate font-medium">{{ auth.email || 'User' }}</span>
+        </div>
+
         <!-- Language selector -->
         <button 
           @click="toggleLanguage"
@@ -50,14 +58,6 @@
           <Languages class="w-4 h-4 shrink-0" />
           <span class="truncate font-medium">{{ locale === 'zh-CN' ? 'English' : '简体中文' }}</span>
         </button>
-
-        <!-- User profile -->
-        <div class="flex items-center gap-3 px-3 py-2 text-sm text-foreground" :title="auth.email || 'User'">
-          <div class="w-4 h-4 rounded-full bg-muted flex items-center justify-center font-bold border border-border text-[8px] shrink-0 uppercase">
-            {{ (auth.email || 'U')[0] }}
-          </div>
-          <span class="truncate font-medium">{{ auth.email || 'User' }}</span>
-        </div>
 
         <!-- Logout button -->
         <button 
