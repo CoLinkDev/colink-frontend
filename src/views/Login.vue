@@ -141,6 +141,9 @@ const handleLogin = async () => {
     const res: any = await request.post('/auth/login', form)
     if (res.code === 0 && res.data?.token) {
       auth.setToken(res.data.token)
+      if (res.data.refreshToken) {
+        auth.setRefreshToken(res.data.refreshToken)
+      }
       router.push('/')
     } else {
       showAlert(t('login.loginFailed'), res.message || t('login.checkCredentials'))

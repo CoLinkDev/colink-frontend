@@ -4,6 +4,7 @@ import request from '@/utils/request'
 
 export const useAuthStore = defineStore('auth', () => {
   const token = ref(localStorage.getItem('token') || '')
+  const refreshToken = ref(localStorage.getItem('refreshToken') || '')
   const email = ref(localStorage.getItem('email') || '')
   const username = ref(localStorage.getItem('username') || '')
 
@@ -12,6 +13,11 @@ export const useAuthStore = defineStore('auth', () => {
   function setToken(newToken: string) {
     token.value = newToken
     localStorage.setItem('token', newToken)
+  }
+
+  function setRefreshToken(newRefreshToken: string) {
+    refreshToken.value = newRefreshToken
+    localStorage.setItem('refreshToken', newRefreshToken)
   }
 
   function setEmail(newEmail: string) {
@@ -26,9 +32,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   function clearToken() {
     token.value = ''
+    refreshToken.value = ''
     email.value = ''
     username.value = ''
     localStorage.removeItem('token')
+    localStorage.removeItem('refreshToken')
     localStorage.removeItem('email')
     localStorage.removeItem('username')
   }
@@ -46,5 +54,17 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { token, email, username, isAuthenticated, setToken, setEmail, setUsername, clearToken, fetchProfile }
+  return { 
+    token, 
+    refreshToken, 
+    email, 
+    username, 
+    isAuthenticated, 
+    setToken, 
+    setRefreshToken, 
+    setEmail, 
+    setUsername, 
+    clearToken, 
+    fetchProfile 
+  }
 })

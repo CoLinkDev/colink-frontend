@@ -209,7 +209,9 @@ const triggerLogout = () => {
 
 const confirmLogout = async () => {
   try {
-    await request.post('/auth/logout')
+    await request.post('/auth/logout', {
+      refreshToken: auth.refreshToken
+    })
   } catch (e) {
     // Ignore error
   }
