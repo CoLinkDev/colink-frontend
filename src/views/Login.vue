@@ -33,7 +33,7 @@
       
       <!-- Top Section -->
       <div class="absolute top-12 left-12 z-10 flex items-center gap-2 select-none">
-        <span class="text-xl font-bold tracking-tighter text-zinc-100 uppercase">CoLink</span>
+        <img :src="colinkLogo" alt="CoLink" class="h-9 w-9" />
       </div>
 
       <!-- Center tagline -->
@@ -112,6 +112,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/store/auth'
 import request from '@/utils/request'
 import Dialog from '@/components/Dialog.vue'
+import colinkLogo from '@/assets/colink-logo.svg'
 
 const router = useRouter()
 const auth = useAuthStore()
