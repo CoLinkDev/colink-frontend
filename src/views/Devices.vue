@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-border/50">
-          <tr v-for="device in devices" :key="device.id" class="hover:bg-muted/30 transition-colors">
+          <tr v-for="device in devices" :key="device.id || device.deviceId" class="hover:bg-muted/30 transition-colors">
             <!-- Name -->
             <td class="px-6 py-4 align-middle">
               <div class="flex items-center gap-3">
@@ -76,7 +76,7 @@
             <!-- Actions -->
             <td class="px-6 py-4 align-middle text-right">
               <button 
-                @click="triggerRemoveDevice(device.id)" 
+                @click="triggerRemoveDevice(device.id || device.deviceId)" 
                 class="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                 :title="$t('common.remove')"
               >
@@ -150,6 +150,7 @@ const fetchDevices = async () => {
 }
 
 const triggerRemoveDevice = (id: string) => {
+  if (!id) return
   deviceToRemove.value = id
   confirmDialogOpen.value = true
 }
@@ -160,7 +161,7 @@ const confirmRemoveDevice = async () => {
   try {
     const res: any = await request.delete(`/devices/${id}`)
     if (res.code === 0) {
-      devices.value = devices.value.filter(d => d.id !== id)
+      devices.value = devices.value.filter(d => (d.id || d.deviceId) !== id)
     } else {
       showAlert(t('dashboard.removeDeviceFailed'), res.message || '')
     }
