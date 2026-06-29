@@ -42,15 +42,18 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchProfile() {
-    if (!token.value) return
+    if (!token.value) return false
     try {
       const res: any = await request.get('/me')
-      if (res.code === 0 && res.data?.email) {
-        setEmail(res.data.email)
-        setUsername(res.data.username || '')
+      if (res.code !== 0 || !res.data?.email) {
+        throw new Error(res.message || 'Invalid profile response')
       }
-    } catch (e) {
-      console.error('Failed to fetch profile', e)
+      setEmail(res.data.email)
+      setUsername(res.data.username || '')
+      return true
+    } catch {
+      clearToken()
+      return false
     }
   }
 

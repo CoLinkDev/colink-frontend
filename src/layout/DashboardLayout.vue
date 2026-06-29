@@ -259,8 +259,10 @@ const selectTheme = (mode: ThemeMode) => {
   themeDialogOpen.value = false
 }
 
-onMounted(() => {
-  auth.fetchProfile()
+onMounted(async () => {
+  if (!await auth.fetchProfile()) {
+    router.push({ name: 'Login' })
+  }
 })
 </script>
 
