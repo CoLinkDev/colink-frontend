@@ -36,15 +36,21 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, _from, next) => {
-  const auth = useAuthStore()
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
-    next({ name: 'Login' })
-  } else if (to.meta.requiresGuest && auth.isAuthenticated) {
-    next({ name: 'Devices' })
-  } else {
-    next()
+export function resolveAuthRedirect(
+  meta: { requiresAuth?: unknown; requiresGuest?: unknown },
+  authenticated: boolean,
+) {
+  if (meta.requiresAuth && !authenticated) {
+    return { name: 'Login' }
   }
+  if (meta.requiresGuest && authenticated) {
+    return { name: 'Devices' }
+  }
+}
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  return resolveAuthRedirect(to.meta, auth.isAuthenticated)
 })
 
 export default router
